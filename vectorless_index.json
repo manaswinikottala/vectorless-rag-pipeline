@@ -1,0 +1,918 @@
+{
+  "students": {
+    "KOTTALA MANASWINI": {
+      "marksheet": {
+        "document_type": "marksheet",
+        "student_info": {
+          "name": "KOTTALA MANASWINI",
+          "father_name": "KOTTALANARSIMHA REDDY",
+          "hall_ticket_no": "21RP1A7222",
+          "college": "RP-MIETW,EDULABAD",
+          "degree": "B. Tech.",
+          "branch": "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE",
+          "year_of_admission": "2021-2022",
+          "serial_no": "21862002912",
+          "class_awarded": "FIRST CLASS",
+          "exam_month_year": "June,2025"
+        },
+        "semesters": [
+          {
+            "year": "I YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "MATHEMATICS - I",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 4.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "APPLIED PHYSICS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "PROGRAMMING FOR PROBLEM SOLVING",
+                "grade_point": 8,
+                "grade": "A",
+                "credits": 4.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "ENGINEERING GRAPHICS",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "APPLIED PHYSICS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 6,
+                "subject_title": "PROGRAMMING FOR PROBLEM SOLVING LAB",
+                "grade_point": 9,
+                "grade": "A+",
+                "credits": 1.5
+              },
+              {
+                "sno": 7,
+                "subject_title": "ENVIRONMENTAL SCIENCE",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "BASIC ELECTRICAL ENGINEERING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              }
+            ]
+          },
+          {
+            "year": "I YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "MATHEMATICS - II",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "CHEMISTRY",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "BASIC ELECTRICAL ENGINEERING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "ENGINEERING WORKSHOP",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 2.5
+              },
+              {
+                "sno": 5,
+                "subject_title": "ENGLISH",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 2.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "ENGINEERING CHEMISTRY LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 7,
+                "subject_title": "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              }
+            ]
+          },
+          {
+            "year": "II YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "GENDER SENSITIZATION LAB",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "MATHEMATICAL AND STATISTICAL FOUNDATIONS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "DISCRETE MATHEMATICS",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "AUTOMATA THEORY AND COMPILER DESIGN",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "DATA STRUCTURES",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 7,
+                "subject_title": "OPERATING SYSTEMS",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "OBJECT ORIENTED PROGRAMMING USING JAVA",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 4.0
+              },
+              {
+                "sno": 9,
+                "subject_title": "PYTHON PROGRAMMING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 2.0
+              },
+              {
+                "sno": 10,
+                "subject_title": "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "II YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "DATABASE MANAGEMENT SYSTEMS",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "JAVA PROGRAMMING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 4,
+                "subject_title": "DATA STRUCTURES LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 5,
+                "subject_title": "ARTIFICIAL INTELLIGENCE LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "OPERATING SYSTEMS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 7,
+                "subject_title": "CONSTITUTION OF INDIA",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "PYTHON PROGRAMMING LAB",
+                "grade_point": 9,
+                "grade": "A+",
+                "credits": 1.0
+              }
+            ]
+          },
+          {
+            "year": "III YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "MACHINE LEARNING",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "KNOWLEDGE REPRESENTATION AND REASONING",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "DATA WAREHOUSING AND BUSINESS INTELLIGENCE",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "DATA ANALYTICS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "MACHINE LEARNING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 6,
+                "subject_title": "BIG DATA TECHNOLOGIES LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 7,
+                "subject_title": "COMPUTER NETWORKS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "ADVANCED COMMUNICATION SKILLS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 9,
+                "subject_title": "DATA ANALYTICS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 10,
+                "subject_title": "INTELLECTUAL PROPERTY RIGHTS",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              }
+            ]
+          },
+          {
+            "year": "III YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "ESSENCE OF INDIAN KNOWLEDGE TRADITION PART",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "DATA MINING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "DESIGN AND ANALYSIS OF ALGORITHMS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "CYBER SECURITY",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "BIG DATA TECHNOLOGIES",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "DATA MINING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 7,
+                "subject_title": "SOFTWARE ENGINEERING",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "INTRODUCTION TO DATA SCIENCE",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "IV YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "DEEP LEARNING",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "AD-HOC & SENSOR NETWORKS",
+                "grade_point": 8,
+                "grade": "A",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "DATA WRANGLING AND VISUALIZATION",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 2.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "PRINCIPLES OF ENTREPRENEURSHIP",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "DEEP LEARNING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "INDUSTRIAL ORIENTED MINI PROJECT OR SUMMER INTERA",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 7,
+                "subject_title": "SEMINAR",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 8,
+                "subject_title": "PROJECT STAGE -",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 3.0
+              },
+              {
+                "sno": 9,
+                "subject_title": "CLOUD COMPUTING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "IV YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "ORGANIZATIONAL BEHAVIOUR",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "TOTAL QUALITY MANAGEMENT",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "PROJECT STAGE",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 7.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "SEMANTIC WEB",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              }
+            ]
+          }
+        ],
+        "summary": {
+          "total_credits_registered": 160,
+          "total_credits_secured": 160,
+          "cgpa": 7.14,
+          "date_of_issue": "July 29, 2025"
+        },
+        "_source_file": "memos.pdf",
+        "_doc_type": "marksheet"
+      }
+    },
+    "BAMANDLA GOUTHAMI": {
+      "marksheet": {
+        "document_type": "marksheet",
+        "student_info": {
+          "name": "BAMANDLA GOUTHAMI",
+          "father_name": "BAMANDLA LAXMAN",
+          "hall_ticket_no": "21RPAA0512",
+          "college": "RP-MIETW,EDULABAD",
+          "degree": "B.Tech",
+          "branch": "COMPUTER SCIENCE & ENGINEERING",
+          "year_of_admission": "2021-2022",
+          "serial_no": "21862002823",
+          "class_awarded": "FIRST CLASS",
+          "exam_month_year": "June,2025"
+        },
+        "semesters": [
+          {
+            "year": "I YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "MATHEMATICS - I",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 4.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "CHEMISTRY",
+                "grade_point": 8,
+                "grade": "A",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "BASIC ELECTRICAL ENGINEERING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "ENGINEERING WORKSHOP",
+                "grade_point": 9,
+                "grade": "A+",
+                "credits": 2.5
+              },
+              {
+                "sno": 5,
+                "subject_title": "ENGLISH",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 2.0
+              },
+              {
+                "sno": 6,
+                "subject_title": "ENGINEERING CHEMISTRY LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 7,
+                "subject_title": "PROGRAMMING FOR PROBLEM SOLVING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 8,
+                "subject_title": "BASIC ELECTRICAL ENGINEERING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 9,
+                "subject_title": "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              }
+            ]
+          },
+          {
+            "year": "I YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "MATHEMATICS - II",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 4.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "APPLIED PHYSICS",
+                "grade_point": 8,
+                "grade": "A",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "PROGRAMMING FOR PROBLEM SOLVING",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 4.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "ENGINEERING GRAPHICS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "APPLIED PHYSICS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 6,
+                "subject_title": "PROGRAMMING FOR PROBLEM SOLVING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              }
+            ]
+          },
+          {
+            "year": "II YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "DISCRETE MATHEMATICS",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "ANALOG AND DIGITAL ELECTRONICS",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "DATA STRUCTURES",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "COMPUTER ORIENTED STATISTICAL METHODS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "II YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "JAVA PROGRAMMING",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "OBJECT ORIENTED PROGRAMMING USING C++",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 2.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "ANALOG AND DIGITAL ELECTRONICS LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "DATA STRUCTURES LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              }
+            ]
+          },
+          {
+            "year": "III YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "FORMAL LANGUAGES & AUTOMATA THEORY",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "DISTRIBUTED DATABASES",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "SOFTWARE ENGINEERING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 4,
+                "subject_title": "MACHINE LEARNING LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              },
+              {
+                "sno": 5,
+                "subject_title": "COMPUTER NETWORKS & WEB TECHNOLOGIES LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.5
+              }
+            ]
+          },
+          {
+            "year": "III YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "SOFTWARE ENGINEERING",
+                "grade_point": 5,
+                "grade": "C",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "CYBER SECURITY",
+                "grade_point": null,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "FUNDAMENTALS OF Al",
+                "grade_point": 0,
+                "grade": "",
+                "credits": 0.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "DESIGN AND ANALYSIS OF ALGORITHMS",
+                "grade_point": 6,
+                "grade": "B",
+                "credits": 4.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "SCRIPTING LANGUAGES",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "IV YEAR",
+            "semester": "I SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "ORGANIZATIONAL BEHAVIOUR",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "INTERNET OF THINGS",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "CRYPTOGRAPHY & NETWORK SECURITY",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "TOTAL QUALITY MANAGEMENT",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "PRINCIPLES OF ENTREPRENEURSHIP",
+                "grade_point": 7,
+                "grade": "B+",
+                "credits": 3.0
+              }
+            ]
+          },
+          {
+            "year": "IV YEAR",
+            "semester": "II SEMESTER",
+            "subjects": [
+              {
+                "sno": 1,
+                "subject_title": "PROJECT STAGE",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 7.0
+              },
+              {
+                "sno": 2,
+                "subject_title": "CRYPTOGRAPHY & NETWORK SECURITY LAB",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 3,
+                "subject_title": "INDUSTRIAL ORIENTED MINI PROJECT / SUMMER INTERNSF",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 2.0
+              },
+              {
+                "sno": 4,
+                "subject_title": "SEMINAR",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 1.0
+              },
+              {
+                "sno": 5,
+                "subject_title": "PROJECT STAGE -",
+                "grade_point": 10,
+                "grade": "O",
+                "credits": 3.0
+              }
+            ]
+          }
+        ],
+        "summary": {
+          "total_credits_registered": 160,
+          "total_credits_secured": 160,
+          "cgpa": 7.25,
+          "date_of_issue": "July 29, 2025"
+        },
+        "_source_file": "memos2.pdf",
+        "_doc_type": "marksheet"
+      }
+    }
+  },
+  "documents": []
+}

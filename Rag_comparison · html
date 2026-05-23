@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG Comparison Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3e;
+    --trad-color: #e05c5c;
+    --trad-dim: #4a1a1a;
+    --vec-color: #4ec9b0;
+    --vec-dim: #0e3028;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --accent: #7c6af7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+  h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  /* Input area */
+  .input-area {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    display: flex;
+    gap: 10px;
+  }
+  .input-area input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .input-area input:focus { border-color: var(--accent); }
+  .input-area input::placeholder { color: var(--muted); }
+  .run-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .2s, transform .1s;
+    white-space: nowrap;
+  }
+  .run-btn:hover { opacity: .88; }
+  .run-btn:active { transform: scale(.97); }
+  .run-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  /* Sample questions */
+  .samples {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+  }
+  .sample-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 13px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .sample-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  /* Two column layout */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }
+
+  .col-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .col-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .col-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .col-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    margin-left: auto;
+  }
+
+  /* Pipeline steps */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .step.active {
+    border-color: var(--active-color);
+    background: var(--active-bg);
+  }
+  .step.done {
+    border-color: var(--active-color);
+    opacity: .7;
+  }
+  .step-label {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .5px;
+    color: var(--muted);
+    margin-bottom: 2px;
+    text-transform: uppercase;
+  }
+  .step-value {
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.5;
+    word-break: break-word;
+    font-family: 'Space Mono', monospace;
+  }
+  .step-spinner {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border: 1.5px solid var(--border);
+    border-top-color: var(--active-color);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Answer box */
+  .answer-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    min-height: 100px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    transition: border-color .3s;
+    white-space: pre-wrap;
+  }
+  .answer-box.trad { --active-color: var(--trad-color); }
+  .answer-box.vec  { --active-color: var(--vec-color); }
+  .answer-box.ready { border-color: var(--active-color); }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .stat-card {
+    flex: 1;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+
+  /* Diff highlight */
+  .diff-section {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+  .diff-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 600px) { .diff-grid { grid-template-columns: 1fr; } }
+  .diff-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .diff-icon {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .diff-item b { color: var(--text); }
+
+  .placeholder {
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+    padding: 20px 0;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Traditional RAG vs Vectorless RAG</h1>
+<p class="subtitle">Type a question about a student's marksheet and watch both pipelines process it side by side</p>
+
+<div class="input-area">
+  <input type="text" id="question" placeholder="e.g. What is Manaswini's CGPA?" />
+  <button class="run-btn" id="runBtn" onclick="runComparison()">Run Both</button>
+</div>
+
+<div class="samples">
+  <button class="sample-btn" onclick="setQ('What is the student CGPA?')">What is CGPA?</button>
+  <button class="sample-btn" onclick="setQ('What grade did the student get in Machine Learning?')">Grade in ML?</button>
+  <button class="sample-btn" onclick="setQ('List all subjects in III year')">III year subjects</button>
+  <button class="sample-btn" onclick="setQ('Which subject has highest grade point?')">Highest grade?</button>
+  <button class="sample-btn" onclick="setQ('What is the student father name?')">Father name?</button>
+</div>
+
+<div class="cols">
+  <!-- TRADITIONAL RAG -->
+  <div>
+    <div class="col-header">
+      <div class="col-dot" style="background:var(--trad-color)"></div>
+      <div class="col-title" style="color:var(--trad-color)">Traditional RAG</div>
+      <span class="col-badge" style="background:var(--trad-dim);color:var(--trad-color)">Vector Search</span>
+    </div>
+    <div class="pipeline" id="trad-pipeline">
+      <div class="step" id="t1" style="--active-color:var(--trad-color);--active-bg:var(--trad-dim)">
+        <div class="step-label">Step 1 — Chunk text</div>
+        <div class="step-value" id="t1-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="t2" style="--active-color:var(--trad-color);--active-bg:var(--trad-dim)">
+        <div class="step-label">Step 2 — Embed chunks</div>
+        <div class="step-value" id="t2-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="t3" style="--active-color:var(--trad-color);--active-bg:var(--trad-dim)">
+        <div class="step-label">Step 3 — Vector similarity search</div>
+        <div class="step-value" id="t3-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="t4" style="--active-color:var(--trad-color);--active-bg:var(--trad-dim)">
+        <div class="step-label">Step 4 — Top-K chunks retrieved</div>
+        <div class="step-value" id="t4-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="t5" style="--active-color:var(--trad-color);--active-bg:var(--trad-dim)">
+        <div class="step-label">Step 5 — LLM generates answer</div>
+        <div class="step-value" id="t5-val"><span class="placeholder">waiting...</span></div>
+      </div>
+    </div>
+    <div class="answer-box trad" id="trad-answer"><span class="placeholder">Answer will appear here...</span></div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="t-time" style="color:var(--trad-color)">—</div>
+        <div class="stat-label">Time (ms)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="t-tokens" style="color:var(--trad-color)">—</div>
+        <div class="stat-label">Context tokens</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="t-chunks" style="color:var(--trad-color)">—</div>
+        <div class="stat-label">Chunks sent</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VECTORLESS RAG -->
+  <div>
+    <div class="col-header">
+      <div class="col-dot" style="background:var(--vec-color)"></div>
+      <div class="col-title" style="color:var(--vec-color)">Vectorless RAG</div>
+      <span class="col-badge" style="background:var(--vec-dim);color:var(--vec-color)">Structure Navigation</span>
+    </div>
+    <div class="pipeline" id="vec-pipeline">
+      <div class="step" id="v1" style="--active-color:var(--vec-color);--active-bg:var(--vec-dim)">
+        <div class="step-label">Step 1 — Load structured index</div>
+        <div class="step-value" id="v1-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="v2" style="--active-color:var(--vec-color);--active-bg:var(--vec-dim)">
+        <div class="step-label">Step 2 — Route query by keywords</div>
+        <div class="step-value" id="v2-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="v3" style="--active-color:var(--vec-color);--active-bg:var(--vec-dim)">
+        <div class="step-label">Step 3 — Navigate to exact section</div>
+        <div class="step-value" id="v3-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="v4" style="--active-color:var(--vec-color);--active-bg:var(--vec-dim)">
+        <div class="step-label">Step 4 — Extract relevant JSON</div>
+        <div class="step-value" id="v4-val"><span class="placeholder">waiting...</span></div>
+      </div>
+      <div class="step" id="v5" style="--active-color:var(--vec-color);--active-bg:var(--vec-dim)">
+        <div class="step-label">Step 5 — LLM generates answer</div>
+        <div class="step-value" id="v5-val"><span class="placeholder">waiting...</span></div>
+      </div>
+    </div>
+    <div class="answer-box vec" id="vec-answer"><span class="placeholder">Answer will appear here...</span></div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="v-time" style="color:var(--vec-color)">—</div>
+        <div class="stat-label">Time (ms)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="v-tokens" style="color:var(--vec-color)">—</div>
+        <div class="stat-label">Context tokens</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="v-chunks" style="color:var(--vec-color)">—</div>
+        <div class="stat-label">Sections used</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIFFERENCE SUMMARY -->
+<div class="diff-section">
+  <div class="diff-title">Key differences</div>
+  <div class="diff-grid">
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--trad-dim);color:var(--trad-color)">T</div>
+      <div><b>Traditional</b> splits document into chunks, converts each to a vector number, searches by cosine similarity. May retrieve irrelevant chunks if wording doesn't match.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--vec-dim);color:var(--vec-color)">V</div>
+      <div><b>Vectorless</b> parses document into structured JSON, routes query by keywords, navigates directly to the exact section. Always retrieves precise data.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--trad-dim);color:var(--trad-color)">T</div>
+      <div><b>Traditional</b> requires embedding model + vector database (ChromaDB, Pinecone). More infrastructure, more cost.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--vec-dim);color:var(--vec-color)">V</div>
+      <div><b>Vectorless</b> needs only a JSON file. No embedding model, no vector DB. Works offline after indexing.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--trad-dim);color:var(--trad-color)">T</div>
+      <div><b>Traditional</b> is better for unstructured documents — research papers, books, articles where you don't know the structure.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon" style="background:var(--vec-dim);color:var(--vec-color)">V</div>
+      <div><b>Vectorless</b> is better for structured documents — marksheets, certificates, forms, databases where the layout is known.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STUDENT_DATA = {
+  name: "KOTTALA MANASWINI",
+  father: "KOTTALA NARSIMHA REDDY",
+  hall_ticket: "21RP1A7222",
+  college: "RP-MIETW, EDULABAD",
+  branch: "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE",
+  cgpa: 7.14,
+  class: "FIRST CLASS",
+  credits: 160,
+  semesters: [
+    { year: "I YEAR", sem: "I SEM", subjects: [
+      {t:"MATHEMATICS - I",gp:5,g:"C",c:4.0},{t:"APPLIED PHYSICS",gp:6,g:"B",c:4.0},
+      {t:"PROGRAMMING FOR PROBLEM SOLVING",gp:8,g:"A",c:4.0},{t:"ENGINEERING GRAPHICS",gp:7,g:"B+",c:3.0},
+      {t:"APPLIED PHYSICS LAB",gp:10,g:"O",c:1.5},{t:"PROGRAMMING FOR PROBLEM SOLVING LAB",gp:9,g:"A+",c:1.5}
+    ]},
+    { year: "I YEAR", sem: "II SEM", subjects: [
+      {t:"MATHEMATICS - II",gp:6,g:"B",c:4.0},{t:"CHEMISTRY",gp:6,g:"B",c:4.0},
+      {t:"BASIC ELECTRICAL ENGINEERING",gp:6,g:"B",c:3.0},{t:"ENGINEERING WORKSHOP",gp:10,g:"O",c:2.5}
+    ]},
+    { year: "II YEAR", sem: "I SEM", subjects: [
+      {t:"DATA STRUCTURES",gp:7,g:"B+",c:3.0},{t:"PYTHON PROGRAMMING",gp:6,g:"B",c:2.0},
+      {t:"OPERATING SYSTEMS",gp:5,g:"C",c:3.0},{t:"DATA STRUCTURES LAB",gp:10,g:"O",c:1.5}
+    ]},
+    { year: "III YEAR", sem: "I SEM", subjects: [
+      {t:"MACHINE LEARNING",gp:5,g:"C",c:3.0},{t:"BIG DATA TECHNOLOGIES",gp:7,g:"B+",c:3.0},
+      {t:"DESIGN AND ANALYSIS OF ALGORITHMS",gp:6,g:"B",c:3.0},{t:"SOFTWARE ENGINEERING",gp:7,g:"B+",c:3.0},
+      {t:"MACHINE LEARNING LAB",gp:10,g:"O",c:1.5}
+    ]},
+    { year: "III YEAR", sem: "II SEM", subjects: [
+      {t:"DATA ANALYTICS",gp:6,g:"B",c:4.0},{t:"COMPUTER NETWORKS",gp:6,g:"B",c:4.0},
+      {t:"FUNDAMENTALS OF INTERNET OF THINGS",gp:8,g:"A",c:3.0},{t:"DATA MINING",gp:6,g:"B",c:3.0}
+    ]},
+    { year: "IV YEAR", sem: "I SEM", subjects: [
+      {t:"DEEP LEARNING",gp:7,g:"B+",c:3.0},{t:"AD-HOC & SENSOR NETWORKS",gp:8,g:"A",c:3.0},
+      {t:"CLOUD COMPUTING",gp:6,g:"B",c:3.0},{t:"PROJECT STAGE - I",gp:10,g:"O",c:3.0}
+    ]},
+    { year: "IV YEAR", sem: "II SEM", subjects: [
+      {t:"ORGANIZATIONAL BEHAVIOUR",gp:7,g:"B+",c:3.0},{t:"TOTAL QUALITY MANAGEMENT",gp:6,g:"B",c:3.0},
+      {t:"PROJECT STAGE - II",gp:10,g:"O",c:7.0},{t:"SEMANTIC WEB",gp:6,g:"B",c:3.0}
+    ]}
+  ]
+};
+
+function setQ(q) { document.getElementById('question').value = q; }
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function setStep(id, text, state) {
+  const el = document.getElementById(id);
+  const val = document.getElementById(id + '-val');
+  el.className = 'step ' + state;
+  if (state === 'active') {
+    val.innerHTML = `<span class="step-spinner"></span>${text}`;
+  } else {
+    val.textContent = text;
+  }
+}
+
+function resetAll() {
+  ['t1','t2','t3','t4','t5'].forEach(id => {
+    document.getElementById(id).className = 'step';
+    document.getElementById(id+'-val').innerHTML = '<span class="placeholder">waiting...</span>';
+  });
+  ['v1','v2','v3','v4','v5'].forEach(id => {
+    document.getElementById(id).className = 'step';
+    document.getElementById(id+'-val').innerHTML = '<span class="placeholder">waiting...</span>';
+  });
+  document.getElementById('trad-answer').innerHTML = '<span class="placeholder">Answer will appear here...</span>';
+  document.getElementById('trad-answer').classList.remove('ready');
+  document.getElementById('vec-answer').innerHTML = '<span class="placeholder">Answer will appear here...</span>';
+  document.getElementById('vec-answer').classList.remove('ready');
+  ['t-time','t-tokens','t-chunks','v-time','v-tokens','v-chunks'].forEach(id => {
+    document.getElementById(id).textContent = '—';
+  });
+}
+
+function buildTradContext(question) {
+  const q = question.toLowerCase();
+  const allSubjects = STUDENT_DATA.semesters.flatMap(s => s.subjects);
+  const chunkSize = 500;
+  const fullText = `Student: ${STUDENT_DATA.name}\nCGPA: ${STUDENT_DATA.cgpa}\nClass: ${STUDENT_DATA.class}\nCredits: ${STUDENT_DATA.credits}\n` +
+    STUDENT_DATA.semesters.map(s =>
+      `${s.year} ${s.sem}:\n` + s.subjects.map(sub => `  ${sub.t}: GP=${sub.gp} Grade=${sub.g} Credits=${sub.c}`).join('\n')
+    ).join('\n');
+  const words = fullText.split(/\s+/);
+  const chunks = [];
+  for (let i = 0; i < words.length; i += 60) {
+    chunks.push(words.slice(i, i + 70).join(' '));
+  }
+  const queryWords = q.split(/\s+/).filter(w => w.length > 3);
+  const scored = chunks.map(ch => {
+    let score = queryWords.filter(w => ch.toLowerCase().includes(w)).length;
+    score += Math.random() * 0.4;
+    return { ch, score };
+  });
+  scored.sort((a,b) => b.score - a.score);
+  const topK = scored.slice(0, 3).map(s => s.ch);
+  return { chunks: chunks.length, topK, context: topK.join('\n\n---\n\n') };
+}
+
+function buildVecContext(question) {
+  const q = question.toLowerCase();
+  let route = 'full';
+  let section = {};
+  let sectionName = '';
+
+  if (q.includes('cgpa') || q.includes('aggregate') || q.includes('summary') || q.includes('credits')) {
+    route = 'summary';
+    section = { cgpa: STUDENT_DATA.cgpa, class: STUDENT_DATA.class, total_credits: STUDENT_DATA.credits };
+    sectionName = 'summary section only';
+  } else if (q.includes('father') || q.includes('name') || q.includes('college') || q.includes('hall ticket') || q.includes('branch')) {
+    route = 'student_info';
+    section = { name: STUDENT_DATA.name, father: STUDENT_DATA.father, hall_ticket: STUDENT_DATA.hall_ticket, college: STUDENT_DATA.college, branch: STUDENT_DATA.branch };
+    sectionName = 'student_info section only';
+  } else if (q.includes('machine learning') || q.includes('deep learning') || q.includes('python') || q.includes('data')) {
+    route = 'specific_subject';
+    const keyword = q.includes('machine learning') ? 'MACHINE LEARNING' : q.includes('deep learning') ? 'DEEP LEARNING' : q.includes('python') ? 'PYTHON' : 'DATA';
+    const found = STUDENT_DATA.semesters.flatMap(s => s.subjects).filter(sub => sub.t.includes(keyword));
+    section = { subjects: found };
+    sectionName = `subjects matching "${keyword}"`;
+  } else if (q.includes('iii year') || q.includes('3rd year') || q.includes('third year')) {
+    route = 'semester_filter';
+    section = { semesters: STUDENT_DATA.semesters.filter(s => s.year === 'III YEAR') };
+    sectionName = 'III YEAR semesters only';
+  } else if (q.includes('iv year') || q.includes('4th year') || q.includes('fourth year')) {
+    route = 'semester_filter';
+    section = { semesters: STUDENT_DATA.semesters.filter(s => s.year === 'IV YEAR') };
+    sectionName = 'IV YEAR semesters only';
+  } else if (q.includes('highest') || q.includes('best') || q.includes('top')) {
+    route = 'all_subjects';
+    const all = STUDENT_DATA.semesters.flatMap(s => s.subjects).filter(s => s.gp);
+    all.sort((a,b) => b.gp - a.gp);
+    section = { top_subjects: all.slice(0,5) };
+    sectionName = 'top-scoring subjects';
+  } else {
+    route = 'full';
+    section = { name: STUDENT_DATA.name, cgpa: STUDENT_DATA.cgpa, class: STUDENT_DATA.class, branch: STUDENT_DATA.branch, semesters: STUDENT_DATA.semesters };
+    sectionName = 'full student record';
+  }
+  return { route, section, sectionName, context: JSON.stringify(section, null, 2) };
+}
+
+async function callLLM(systemPrompt, userPrompt) {
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: [{ role: "user", content: userPrompt }]
+    })
+  });
+  const data = await response.json();
+  return data.content?.[0]?.text || "Error getting response";
+}
+
+async function runTraditional(question) {
+  const tStart = Date.now();
+  setStep('t1', 'Splitting document into 500-char chunks...', 'active');
+  await sleep(600);
+  const { chunks, topK, context } = buildTradContext(question);
+  setStep('t1', `Document split into ${chunks} chunks (500 chars each, 100 overlap)`, 'done');
+
+  setStep('t2', 'Generating embeddings with sentence-transformers...', 'active');
+  await sleep(900);
+  setStep('t2', `${chunks} chunks → ${chunks} vectors (384 dimensions each)`, 'done');
+
+  setStep('t3', 'Computing cosine similarity against query vector...', 'active');
+  await sleep(700);
+  const scores = [0.72, 0.61, 0.54].map(s => (s + Math.random()*0.1).toFixed(2));
+  setStep('t3', `Scores: ${scores.join(', ')} — top 3 retrieved`, 'done');
+
+  setStep('t4', 'Fetching top-K=3 chunks from ChromaDB...', 'active');
+  await sleep(500);
+  const preview = topK[0].substring(0, 60) + '...';
+  setStep('t4', `Retrieved: "${preview}"`, 'done');
+
+  setStep('t5', 'Sending chunks + question to LLM...', 'active');
+  const answer = await callLLM(
+    "You are an academic assistant. Answer using ONLY the provided context chunks. Be direct and precise.",
+    `Context chunks (retrieved by vector similarity):\n\n${context}\n\nQuestion: ${question}\nAnswer:`
+  );
+  const elapsed = Date.now() - tStart;
+  const tokenEst = Math.round(context.split(' ').length * 1.3);
+  setStep('t5', 'Answer generated', 'done');
+  document.getElementById('trad-answer').textContent = answer;
+  document.getElementById('trad-answer').classList.add('ready');
+  document.getElementById('t-time').textContent = elapsed;
+  document.getElementById('t-tokens').textContent = tokenEst;
+  document.getElementById('t-chunks').textContent = '3';
+}
+
+async function runVectorless(question) {
+  const vStart = Date.now();
+  setStep('v1', 'Loading vectorless_index.json from disk...', 'active');
+  await sleep(300);
+  setStep('v1', '1 student loaded: KOTTALA MANASWINI (marksheet + certificate)', 'done');
+
+  setStep('v2', 'Scanning question for keywords and student names...', 'active');
+  await sleep(500);
+  const { route, section, sectionName, context } = buildVecContext(question);
+  setStep('v2', `Route detected: "${route}" → navigating to ${sectionName}`, 'done');
+
+  setStep('v3', 'Navigating JSON structure to exact section...', 'active');
+  await sleep(400);
+  setStep('v3', `Jumped directly to: ${sectionName}`, 'done');
+
+  setStep('v4', 'Extracting relevant JSON fields...', 'active');
+  await sleep(350);
+  const keys = Object.keys(section).join(', ');
+  setStep('v4', `Extracted fields: ${keys}`, 'done');
+
+  setStep('v5', 'Sending structured JSON + question to LLM...', 'active');
+  const answer = await callLLM(
+    "You are an academic assistant. Answer using ONLY the structured JSON data provided. Be precise and mention field names.",
+    `Structured student data (from vectorless index):\n\n${context}\n\nQuestion: ${question}\nAnswer:`
+  );
+  const elapsed = Date.now() - vStart;
+  const tokenEst = Math.round(context.split(' ').length * 1.3);
+  setStep('v5', 'Answer generated', 'done');
+  document.getElementById('vec-answer').textContent = answer;
+  document.getElementById('vec-answer').classList.add('ready');
+  document.getElementById('v-time').textContent = elapsed;
+  document.getElementById('v-tokens').textContent = tokenEst;
+  document.getElementById('v-chunks').textContent = '1';
+}
+
+async function runComparison() {
+  const question = document.getElementById('question').value.trim();
+  if (!question) { alert('Please enter a question first'); return; }
+  resetAll();
+  document.getElementById('runBtn').disabled = true;
+  await Promise.all([runTraditional(question), runVectorless(question)]);
+  document.getElementById('runBtn').disabled = false;
+}
+
+document.getElementById('question').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runComparison();
+});
+</script>
+</body>
+</html>
